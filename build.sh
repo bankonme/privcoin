@@ -7,7 +7,7 @@ script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 function setup() {
 	for recipe in $script_dir/recipes/*.sh; do
 		echo "===Setup: "$($recipe info hname)" ==="
-		$recipe setup
+		$recipe setup 2>&1 | tee setup_$($recipe info id).log
 	done
 }
 
