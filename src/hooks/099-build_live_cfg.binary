@@ -55,5 +55,5 @@ echo "
 label verify
         menu label Verify Integrity
         kernel /live/vmlinuz
-        append initrd=/live/initrd.img boot=live config verify-integrity" \
+        append initrd=/live/initrd.img boot=live config verify-checksums" \
 >>$live_cfg
