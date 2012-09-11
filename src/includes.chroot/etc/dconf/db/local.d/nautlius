@@ -1,0 +1,5 @@
+[org/gnome/nautlius/list-view]
+default-zoom-level='smallest'
+
+[org/gnome/nautlius/preferences]
+default-folder-viewer='list-view'
