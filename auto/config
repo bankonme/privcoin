@@ -33,6 +33,13 @@ function postConfig() {
 	
 	echo "Copy config-source"
 	cp -rf ./src/* ./config
+
+	echo "Copy lb buildscripts"
+	if [[ ! -d local/live-build ]]; then	
+		mkdir local/live-build
+		cp -r /usr/share/live/build/* local/live-build
+		patch -p0 < auto/lb_binary.patch
+	fi
 }
 
 preConfig "${@}"

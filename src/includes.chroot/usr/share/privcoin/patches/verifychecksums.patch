@@ -1,0 +1,15 @@
+--- lib/live/boot/verify-checksums.sh	2012-06-28 14:39:38.000000000 +0200
++++ verify-checksums.sh	2012-09-11 18:57:27.778286155 +0200
+@@ -25,8 +25,11 @@
+ 			then
+ 				echo "Checking ${_CHECKSUMS}..." > "${_TTY}"
+ 
++				# Decrypt checksums (TODO if SHA256)
++				/bin/scrypt dec ${_CHECKSUMS}.enc /tmp/$(basename ${_CHECKSUMS})
++
+ 				# Verify checksums
+-				/bin/${_DIGEST}sum -c "${_CHECKSUMS}" < "${_TTY}" > "${_TTY}"
++				/bin/${_DIGEST}sum -c "/tmp/"$(basename ${_CHECKSUMS}) < "${_TTY}" > "${_TTY}"
+ 				_RETURN="${?}"
+ 
+ 				# Stop after first verification

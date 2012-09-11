@@ -33,3 +33,4 @@ virtualbox-guest-utils
 virtualbox
 virtualbox-dkms
 virtualbox-qt
+scrypt
