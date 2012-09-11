@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for patch in /usr/share/privcoin/patches/*; do
+for patch in /usr/share/privcoin/patches/*.patch; do
 	patch -p0 < $patch
 	rm $patch
 done
