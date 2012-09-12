@@ -34,6 +34,11 @@ function postConfig() {
 	echo "Copy config-source"
 	cp -rf ./src/* ./config
 
+	if $BUILD_FOR_CD; then
+		echo "Disable mountable root patch"
+		mv ./config/includes.chroot/usr/share/privcoin/patches/mountscript.patch ./config/includes.chroot/usr/share/privcoin/patches/mountscript.patch.off
+	fi
+
 	echo "Copy lb buildscripts"
 	if [[ ! -d local/live-build ]]; then	
 		mkdir local/live-build
