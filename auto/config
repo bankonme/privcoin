@@ -28,7 +28,7 @@ function postConfig() {
 	echo "===PostConfig==="	
 
 	if $PRIVACY_KERNEL; then
-		cp /usr/share/live/build/examples/hooks/all_chroot_update-initramfs.sh ./config/hooks/001-update-initramfs.chroot
+		cp /usr/share/live/build/examples/hooks/all_chroot_update-initramfs.sh ./config/hooks/099-update-initramfs.chroot
 	fi
 	
 	echo "Copy config-source"
