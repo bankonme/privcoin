@@ -5,6 +5,7 @@ TMP=$CONF_BASE_DIR/tmp
 ARCH=amd64
 COMPILER_JOBS=9
 BUILD_FOR_CD=true
+NO_VIRTUALBOX=false
 
 
 #Bitcoin-QT

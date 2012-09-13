@@ -26,11 +26,7 @@ ntfs-3g
 gedit
 chromium
 
-linux-headers-amd64
-virtualbox-guest-dkms
-virtualbox-guest-x11
-virtualbox-guest-utils
-virtualbox
-virtualbox-dkms
-virtualbox-qt
+patch
 scrypt
+
+

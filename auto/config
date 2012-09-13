@@ -39,6 +39,11 @@ function postConfig() {
 		mv ./config/includes.chroot/usr/share/privcoin/patches/mountscript.patch ./config/includes.chroot/usr/share/privcoin/patches/mountscript.patch.off
 	fi
 
+	if $NO_VIRTUALBOX; then
+		echo "Delete virtualbox package list"
+		rm ./config/package-lists/virtualbox.list.chroot
+	fi
+
 	echo "Copy lb buildscripts"
 	if [[ ! -d local/live-build ]]; then	
 		mkdir local/live-build
