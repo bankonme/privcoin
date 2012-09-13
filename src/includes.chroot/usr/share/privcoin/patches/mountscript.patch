@@ -1,0 +1,11 @@
+--- lib/live/boot/misc-helpers.sh	2012-06-28 14:39:38.000000000 +0200
++++ lib/live/boot/misc-helpers.sh	2012-08-10 16:14:04.869120293 +0200
+@@ -227,7 +227,7 @@
+ 	then
+ 		devuid=$(blkid -o value -s UUID "$devname")
+ 		[ -n "$devuid" ] && grep -qs "\<$devuid\>" $tried && continue
+-		mount -t ${fstype} -o ro,noatime "${devname}" ${mountpoint} || continue
++		mount -t ${fstype} -o ro,noatime,gid=1000,uid=1000,dmask=000,fmask=000 "${devname}" ${mountpoint} || continue
+ 		[ -n "$devuid" ] && echo "$devuid" >> $tried
+ 
+ 		if [ -n "${FINDISO}" ]

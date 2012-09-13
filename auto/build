@@ -1,0 +1,21 @@
+#!/bin/bash
+
+. ./config.sh
+
+./build.sh setup
+./build.sh build
+./build.sh copy
+
+
+# Do it manually, to workaround multiple kernel handling in live-build
+
+lb bootstrap 2>&1 | tee build_bootstrap.log
+lb chroot 2>&1 | tee build_chroot.log
+
+if $PRIVACY_KERNEL; then
+	mkdir chroot/boot/alt
+	mv chroot/boot/vmlinuz-*-privcoin chroot/boot/alt/privcoin_vmlinuz
+	mv chroot/boot/initrd.img-*-privcoin chroot/boot/alt/privcoin_initrd.img
+fi
+
+lb binary 2>&1 | tee build_binary.log

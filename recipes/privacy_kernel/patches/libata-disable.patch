@@ -1,0 +1,15 @@
+--- drivers/ata/libata-core.c
++++ drivers/ata/libata-core.c
+@@ -2182,6 +2182,12 @@
+ 		ata_dev_disable(dev);
+ 		return 0;
+ 	}
++	
++	if(!(atapi_enabled && (dev->class == ATA_DEV_ATAPI))) {
++		ata_dev_printk(dev, KERN_INFO, "ATA devices disabled for security reasons\n");
++		ata_dev_disable(dev);
++		return 0;
++	}
+ 
+ 	rc = ata_do_link_spd_horkage(dev);
+ 	if (rc)

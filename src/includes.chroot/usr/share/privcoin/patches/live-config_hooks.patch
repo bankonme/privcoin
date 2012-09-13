@@ -1,0 +1,20 @@
+--- lib/live/config/9990-hooks	2012-07-12 20:17:57.000000000 +0200
++++ lib/live/config/9990-hooks.patched	2012-08-11 14:08:32.820382195 +0200
+@@ -10,7 +10,7 @@
+ 
+ Hooks ()
+ {
+-	if [ -z "${LIVE_HOOKS}" ]
++	if [ ! -z "${LIVE_HOOKS}" ]
+ 	then
+ 		return
+ 	fi
+@@ -75,7 +75,7 @@
+ 		fi
+ 
+ 		chmod 0755 "${_TMPFILE}"
+-		./"${_TMPFILE}"
++		"${_TMPFILE}"
+ 		rm -f "${_TMPFILE}"
+ 	done
+ }

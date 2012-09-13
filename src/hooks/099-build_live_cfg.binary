@@ -1,0 +1,59 @@
+#!/bin/bash
+
+. ./config.sh
+. "${LB_BASE:-/usr/share/live/build}"/scripts/build.sh
+Read_conffiles config/all config/common config/bootstrap config/chroot config/binary config/source
+
+mkdir binary/live/alt
+cp -a chroot/boot/alt/* binary/live/alt/
+
+case "${LB_BINARY_IMAGES}" in
+	iso*)
+		_TARGET="binary/isolinux"
+		;;
+
+	net*)
+		_TARGET="tftpboot"
+		;;
+
+	hdd*|*)
+		_TARGET="binary/syslinux"
+		;;
+esac
+
+live_cfg="$_TARGET/live.cfg"
+test -e $live_cfg && rm $live_cfg
+touch $live_cfg
+
+
+echo "
+label 1
+        menu label PrivCoin
+        kernel /live/vmlinuz
+        append initrd=/live/initrd.img boot=live config ${LB_BOOTAPPEND_LIVE}" \
+>>$live_cfg
+
+cd binary
+i=2
+for kernel in live/alt/*_vmlinuz; do
+	kernel_id=${kernel%_vmlinuz} && kernel_id=${kernel_id#live/alt/}
+	kernel_hname="(${CUSTOM_KERNEL_HNAME[$kernel_id]})"
+	initrd="live/alt/${kernel_id}_initrd.img"
+
+	echo "
+label $i
+        menu label PrivCoin $kernel_hname
+        kernel /$kernel
+        append initrd=/$initrd boot=live config ${LB_BOOTAPPEND_LIVE}" \
+>>${live_cfg#binary/}
+
+        i=$((i+1))
+done
+cd ..
+
+echo "
+label verify
+        menu label Verify Integrity
+        kernel /live/vmlinuz
+        append initrd=/live/initrd.img boot=live config verify-integrity" \
+>>$live_cfg

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+. ./config.sh
+
+lb_config="lb config noauto \
+	--bootstrap-flavour standard \
+	--binary-images iso-hybrid \
+	--iso-preparer Debian \
+	--iso-application PrivCoin \
+	--bootappend-live \"live-config.hooks=medium noprompt locales=de_DE.UTF-8 en_US.UTF8 keyboard-layouts=de\" \
+	--archive-areas \"main contrib non-free\" \
+	--tasksel none \
+	--includes none \
+	--security true \
+	--apt-recommends false \
+	--apt-indices false \
+	--debian-installer false \
+	--memtest none \
+	--cache-indices false "
+
+
+
+function preConfig() {
+	echo "===PreConfig==="
+}
+
+function postConfig() {
+	echo "===PostConfig==="	
+
+	if $PRIVACY_KERNEL; then
+		cp /usr/share/live/build/examples/hooks/all_chroot_update-initramfs.sh ./config/hooks/001-update-initramfs.chroot
+	fi
+	
+	echo "Copy config-source"
+	cp -rf ./src/* ./config
+}
+
+preConfig "${@}"
+
+echo "===Config==="
+eval $lb_config
+
+postConfig

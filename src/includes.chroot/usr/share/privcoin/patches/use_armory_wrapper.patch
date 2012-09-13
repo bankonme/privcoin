@@ -1,0 +1,11 @@
+--- usr/share/applications/armory.desktop	2012-08-08 18:11:03.558767077 +0200
++++ armory.desktop	2012-08-11 18:43:28.273006253 +0200
+@@ -4,7 +4,7 @@
+ GenericName=Bitcoin Client
+ Comment=Full-featured Bitcoin wallet management application
+ Categories=Qt;Network;
+-Exec=python /usr/share/armory/ArmoryQt.py
++Exec=/usr/share/privcoin/armory-wrapper.sh
+ Icon=armoryicon
+ StartupNotify=false
+ Terminal=false

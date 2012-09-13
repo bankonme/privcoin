@@ -1,0 +1,33 @@
+#!/bin/bash
+
+. ./config.sh
+
+# Kernel
+
+$PRIVACY_KERNEL && ./kernelbuild.sh build 2>&1 | tee build_kernel.log
+$PRIVACY_KERNEL && ./kernelbuild.sh copyKernel ./config/packages.chroot/
+
+
+# Bitcoin
+
+./bitcoinbuild.sh 2>&1 | tee build_bitcoin.log
+mkdir -p config/includes.chroot/usr/bin
+./bitcoinbuild.sh copy config/includes.chroot/
+
+
+# Armory
+
+./armorybuild.sh 2>&1 | tee build_armory.log
+./armorybuild.sh copy config/packages.chroot/
+
+
+# Do it manually, to workaround multiple kernel handling in live-build
+
+lb bootstrap 2>&1 | tee build_bootstrap.log
+lb chroot 2>&1 | tee build_chroot.log
+
+mkdir chroot/boot/alt
+mv chroot/boot/vmlinuz-*-privcoin chroot/boot/alt/privcoin_vmlinuz
+mv chroot/boot/initrd.img-*-privcoin chroot/boot/alt/privcoin_initrd.img
+
+lb binary 2>&1 | tee build_binary.log
