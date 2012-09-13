@@ -1,8 +1,6 @@
---- usr/share/applications/bitcoin-qt.desktop	2012-09-12 11:26:25.000000000 +0200
-+++ bitcoin-qt.desktop	2012-09-12 12:08:06.380406818 +0200
-@@ -2,9 +2,7 @@
- Encoding=UTF-8
- Name=Bitcoin
+--- usr/share/applications/bitcoin-qt.desktop	2012-09-12 12:43:25.000000000 +0200
++++ ../bitcoin-qt.desktop	2012-09-12 16:07:01.524189674 +0200
+@@ -4,7 +4,7 @@
  Comment=Bitcoin P2P Cryptocurrency
  Comment[fr]=Bitcoin, monnaie virtuelle cryptographique pair à pair
  Comment[tr]=Bitcoin, eşten eşe kriptografik sanal para birimi
