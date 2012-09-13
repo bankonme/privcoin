@@ -1,0 +1,37 @@
+PrivCoin
+
+A debian-live based linux distribution to do bitcoin transactions.
+
+
+Features:
+* Additional Privacy-Kernel included: Disables access to hdd and network
+* Bitcoin QT and Armory included (both compiled from source)
+* Virtualbox included (to facilitate migration of wallets from VM-Setups)
+* "Fresh" Operating System after each boot
+* Integrity protected by encrypted checksums of all relevant files
+* Based on debian-live (http://live.debian.net): Easily extendable and customizable
+
+
+Getting Started:
+You will need a VM with Debian Wheezy (amd64 preferred, other architectures are untested and you have to change config.sh accordingly).
+
+Then do the following:
+aptitude install live-builder
+git clone https://github.com/flipperfish/privcoin.git
+cd privcoin
+lb config
+sudo lb build
+
+During the build you will be asked for a password. With this password the integrity of your live-system can be verified. It does NOT encrypt the live-system, only integrity is protected.
+After the build, there will be a file "binary.hybrid.iso" in the root of the repository.
+This can be burnt to cd or written to flash-drive by using dd (Linux) or UNetbootin (Windows).
+
+You can tweak some options in config.sh:
+* BUILD_FOR_CD: If set to false, live-boot-scripts will be patched to mount the live-medium writable (not the root-filesystem, this is squashfs anyways!). As side-effect the image can not run from cd anymore.
+* NO_VIRTUALBOX: Leave out virtualbox-packages to save space in the resulting image.
+
+
+Version History:
+
+v1.0.0 "Bo" (2012-09-13)
+- Initial Release
