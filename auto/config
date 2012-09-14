@@ -37,6 +37,7 @@ function postConfig() {
 	if $BUILD_FOR_CD; then
 		echo "Disable mountable root patch"
 		mv ./config/includes.chroot/usr/share/privcoin/patches/mountscript.patch ./config/includes.chroot/usr/share/privcoin/patches/mountscript.patch.off
+		rm ./config/includes.binary/live/hooks/remount-rw
 	fi
 
 	if $NO_VIRTUALBOX; then
