@@ -7,7 +7,7 @@ lb_config="lb config noauto \
 	--binary-images iso-hybrid \
 	--iso-preparer Debian \
 	--iso-application PrivCoin \
-	--bootappend-live \"live-config.hooks=medium noprompt locales=de_DE.UTF-8 en_US.UTF8 keyboard-layouts=de\" \
+	--bootappend-live \"live-config.hooks=medium noprompt locales=${LOCALE} keyboard-layouts=${KEYBOARD}\" \
 	--archive-areas \"main contrib non-free\" \
 	--tasksel none \
 	--includes none \
