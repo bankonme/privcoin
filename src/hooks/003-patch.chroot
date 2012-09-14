@@ -4,3 +4,5 @@ for patch in /usr/share/privcoin/patches/*.patch; do
 	patch -p0 < $patch
 	rm $patch
 done
+
+rm -r /usr/share/privcoin/patches/
